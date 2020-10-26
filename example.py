@@ -54,7 +54,7 @@ def get_related_videos(query):
 def get_videos_stats(video_ids):
     stats = []
     for i in range(0, len(video_ids), 50):
-        res = youtube.videos.list(id=','.join(video_ids[i:i+50]),
+        res = youtube.videos().list(id=','.join(video_ids[i:i+50]),
                                  part='statistics').execute()
         stats += res['items']
     return stats
