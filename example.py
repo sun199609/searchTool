@@ -68,7 +68,7 @@ def main():
     # get video stats
     video_ids = list(map(lambda x:x['id']['videoId'], videos))
     stats = get_videos_stats(video_ids)
-    println(len(stats))
+    print(len(stats))
     
     
 
