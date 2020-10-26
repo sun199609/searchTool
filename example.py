@@ -64,7 +64,7 @@ def main():
     
     # get related videos
     videos = get_related_videos("tenet")
-  
+    print(len(videos))
     # get video stats
     video_ids = list(map(lambda x:x['id']['videoId'], videos))
     stats = get_videos_stats(video_ids)
