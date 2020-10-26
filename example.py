@@ -5,6 +5,7 @@
 # https://developers.google.com/explorer-help/guides/code_samples#python
 
 import os
+import csv
 
 import google_auth_oauthlib.flow
 import googleapiclient.discovery
@@ -57,7 +58,7 @@ def get_videos_stats(video_ids):
         res = youtube.videos().list(id=','.join(video_ids[i:i+50]),
                                  part='statistics').execute()
         stats += res['items']
-    return stats
+    return stats  
 
 
 def main():
