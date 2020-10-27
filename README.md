@@ -22,5 +22,5 @@ The search results will be saved to the csv file (default saved at the same fold
 | ---------- | :----------: | :----------: | :----------: |
 | titlexxx | xxxx-xx-xxTxx:xx:xxZ | channel_id | view_count | 
 ### Get more information about the YouTube API    
-https://developers.google.com/youtube/v3/getting-started
+* https://developers.google.com/youtube/v3/getting-started
 
