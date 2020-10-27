@@ -39,7 +39,6 @@ def get_related_videos(query):
             part="snippet",
             q=query,
             type="video",
-            maxResults=50,
             pageToken=next_page_token
         ).execute()
         videos += res['items']
@@ -61,6 +60,22 @@ def get_videos_stats(video_ids):
     return stats  
 
 
+def write_json_into_csv(videos, stats):
+    csv_file = open("results.csv", "w", newline='')
+    writer = csv.writer(csv_file,delimiter=',',quoting=csv.QUOTE_MINIMAL)
+    keys = ['title','upload_time','uploader','view_count']
+    writer.writerow(keys)
+    
+    for dic, stat in zip(videos, stats):
+        title = dic['snippet']['title']
+        upload_time = dic['snippet']['publishedAt']
+        uploader = dic['snippet']['channelId']
+        view_count = stat['statistics']['viewCount']
+        writer.writerow([title, upload_time, uploader, view_count])
+    csv_file.close()
+
+
+
 def main():
     
     # get related videos
@@ -72,6 +87,9 @@ def main():
     video_ids = list(map(lambda x:x['id']['videoId'], videos))
     stats = get_videos_stats(video_ids)
     print(len(stats))
+    
+    write_json_into_csv(videos['items'], stats['items'])
+    
     
     
 
