@@ -15,6 +15,8 @@ I test this search tool on ubuntu18.04 using python3.
    
 python example.py (--query "query_term")  
 ### Results Format 
+![image](https://github.com/sun199609/searchTool/blob/main/images/result.png)
+
 The search results will be saved to the csv file (default saved at the same folder) in the format of      
 | title | upload_time | uploader | view_count |  
 | ---------- | :----------: | :----------: | :----------: |
