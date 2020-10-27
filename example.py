@@ -29,12 +29,12 @@ def get_related_videos(query):
             part="snippet",
             q=query,
             type="video",
-            maxResults=10,
+            maxResults=50,
             pageToken=next_page_token
         ).execute()
         videos += res['items']
         next_page_token = res.get('nextPageToken')
-        if next_page_token is None or len(videos)>=10:
+        if next_page_token is None:
             break
      
     videos = sorted(videos, key=lambda x:x['snippet']['publishedAt'])
