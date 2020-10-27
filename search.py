@@ -14,7 +14,7 @@ scopes = ["https://www.googleapis.com/auth/youtube.force-ssl"]
 
 api_service_name = "youtube"
 api_version = "v3"
-api_key = "AIzaSyBxBcaYRKKjwMb3RqNi4gi5Up5OvRlThUY"
+api_key = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" # substitute this using your own api key
 
 youtube = googleapiclient.discovery.build(
     api_service_name, api_version, developerKey=api_key) #credentials=credentials)
