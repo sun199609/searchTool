@@ -38,7 +38,7 @@ def get_related_videos(query):
             break
      
     videos = sorted(videos, key=lambda x:x['snippet']['publishedAt'])
-    
+    print("Got " + str(len(videos)) + " related videos.")
     return videos
 
 
@@ -48,6 +48,7 @@ def get_videos_stats(video_ids):
         res = youtube.videos().list(id=','.join(video_ids[i:i+50]),
                                  part='statistics').execute()
         stats += res['items']
+    print("Got " + str(len(stats)) + " statistics of related videos.")
     return stats  
 
 
@@ -56,6 +57,7 @@ def write_json_into_csv(videos, stats):
     writer = csv.writer(csv_file,delimiter=',',quoting=csv.QUOTE_MINIMAL)
     keys = ['title','upload_time','uploader','view_count']
     writer.writerow(keys)
+    size = len(videos)
     
     for dic, stat in zip(videos, stats):
         if 'title' in dic['snippet']:
@@ -76,6 +78,7 @@ def write_json_into_csv(videos, stats):
             view_count = " "
         writer.writerow([title, upload_time, uploader, view_count])
     csv_file.close()
+    print(str(size) + " results has been writen into csv file.")
 
 
 
