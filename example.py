@@ -7,6 +7,7 @@
 import os
 import csv
 import json
+import argparse
 
 import google_auth_oauthlib.flow
 import googleapiclient.discovery
@@ -81,9 +82,12 @@ def write_json_into_csv(videos, stats):
 
 
 def main():
+    parser = argparse.ArgumentParser(description="arguments description")
+    parser.add_argument('--query','-q',help='query', default='tenet')
+    args = parser.parse_args()
     
     # get related videos
-    videos = get_related_videos("tenet")
+    videos = get_related_videos(args.query)
     print(len(videos))
     with open("data.json","a") as f:
         f.write(videos)
@@ -97,7 +101,5 @@ def main():
     write_json_into_csv(videos, stats)
     
     
-    
-
 if __name__ == "__main__":
     main()
