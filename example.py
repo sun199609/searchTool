@@ -16,18 +16,20 @@ scopes = ["https://www.googleapis.com/auth/youtube.force-ssl"]
 
 # Disable OAuthlib's HTTPS verification when running locally.
 # *DO NOT* leave this option enabled in production.
-os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
+# os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
 
 api_service_name = "youtube"
 api_version = "v3"
 client_secrets_file = "client_secret_463048915584-qrp7qtk37bo3m9gvm5qboho7jb6hhku5.apps.googleusercontent.com.json"
+api_key = "AIzaSyBOUiiCsztoaP6lR-3NMP_O3aOdf7KPZMw"
+
 
 # Get credentials and create an API client
 flow = google_auth_oauthlib.flow.InstalledAppFlow.from_client_secrets_file(
     client_secrets_file, scopes)
 credentials = flow.run_console()
 youtube = googleapiclient.discovery.build(
-    api_service_name, api_version, credentials=credentials)
+    api_service_name, api_version, developerKey=api_key) #credentials=credentials)
 
 
 
@@ -40,12 +42,13 @@ def get_related_videos(query):
             part="snippet",
             q=query,
             type="video",
+            maxResults=50,
             pageToken=next_page_token
         ).execute()
         videos += res['items']
         next_page_token = res.get('nextPageToken')
-#         if next_page_token is None:
-        break   # just using 5 results
+        if next_page_token is None or len(videos) >= 50:
+            break
      
     videos = sorted(videos, key=lambda x:x['snippet']['publishedAt'])
     
@@ -91,7 +94,7 @@ def main():
     print(len(stats))
     
     # write result into csv file
-    write_json_into_csv(videos['items'], stats['items'])
+    write_json_into_csv(videos, stats)
     
     
     
