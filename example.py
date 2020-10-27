@@ -6,6 +6,7 @@
 
 import os
 import csv
+import json
 
 import google_auth_oauthlib.flow
 import googleapiclient.discovery
@@ -83,11 +84,13 @@ def main():
     print(len(videos))
     with open("data.json","a") as f:
         f.write(videos)
+        
     # get video stats
     video_ids = list(map(lambda x:x['id']['videoId'], videos))
     stats = get_videos_stats(video_ids)
     print(len(stats))
     
+    # write result into csv file
     write_json_into_csv(videos['items'], stats['items'])
     
     
