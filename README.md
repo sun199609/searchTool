@@ -11,6 +11,7 @@ You should make the environments set up before running this CLI tool.
 * The google-auth-oauthlib and google-auth-httplib2 libraries for user authorization.    
   * pip install --upgrade google-auth-oauthlib google-auth-httplib2  
 * Get your own api_key
+  * api_key = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" # substitute this using your own api key before using this tool
 
 I test this search tool on ubuntu18.04 using python3.
    
