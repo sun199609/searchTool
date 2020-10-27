@@ -29,12 +29,12 @@ def get_related_videos(query):
             part="snippet",
             q=query,
             type="video",
-            maxResults=50,
+            maxResults=10,
             pageToken=next_page_token
         ).execute()
         videos += res['items']
         next_page_token = res.get('nextPageToken')
-        if next_page_token is None:
+        if next_page_token is None or len(videos)>=10:
             break
      
     videos = sorted(videos, key=lambda x:x['snippet']['publishedAt'])
@@ -87,16 +87,26 @@ def main():
     start_time = datetime.datetime.now()
     
     # get related videos
-    videos = get_related_videos(args.query)
-    print(len(videos))
+    try:
+        videos = get_related_videos(args.query)
+    except Exception as e:
+        print("error occurs, you should probably change another api_key" + str(e))
+        return
         
     # get video stats
     video_ids = list(map(lambda x:x['id']['videoId'], videos))
-    stats = get_videos_stats(video_ids)
-    print(len(stats))
+    try:
+        stats = get_videos_stats(video_ids)
+    except Exception as e:
+        print("error occurs, you should probably change another api_key" + str(e))
+        return 
     
     # write result into csv file
-    write_json_into_csv(videos, stats)
+    try: 
+        write_json_into_csv(videos, stats)
+    except Exception as e:
+        print("error happens while writing results into csv: " + str(e))
+        return
     
     # output time
     end_time = datetime.datetime.now()
