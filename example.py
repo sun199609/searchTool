@@ -43,12 +43,12 @@ def get_related_videos(query):
             part="snippet",
             q=query,
             type="video",
-            maxResults=10,
+            maxResults=5,
             pageToken=next_page_token
         ).execute()
         videos += res['items']
         next_page_token = res.get('nextPageToken')
-        if next_page_token is None or len(videos) >= 10:
+        if next_page_token is None or len(videos) >= 5:
             break
      
     videos = sorted(videos, key=lambda x:x['snippet']['publishedAt'])
@@ -89,8 +89,6 @@ def main():
     # get related videos
     videos = get_related_videos(args.query)
     print(len(videos))
-    with open("data.json","a") as f:
-        f.write(videos)
         
     # get video stats
     video_ids = list(map(lambda x:x['id']['videoId'], videos))
