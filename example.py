@@ -22,7 +22,7 @@ scopes = ["https://www.googleapis.com/auth/youtube.force-ssl"]
 api_service_name = "youtube"
 api_version = "v3"
 client_secrets_file = "client_secret_463048915584-qrp7qtk37bo3m9gvm5qboho7jb6hhku5.apps.googleusercontent.com.json"
-api_key = "AIzaSyBOUiiCsztoaP6lR-3NMP_O3aOdf7KPZMw"
+api_key = "AIzaSyBWqmnDfXSfNiSEDsluOMui9Dew_vHc0u8"
 
 
 # Get credentials and create an API client
