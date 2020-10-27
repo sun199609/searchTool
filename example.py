@@ -22,7 +22,7 @@ scopes = ["https://www.googleapis.com/auth/youtube.force-ssl"]
 api_service_name = "youtube"
 api_version = "v3"
 client_secrets_file = "client_secret_463048915584-qrp7qtk37bo3m9gvm5qboho7jb6hhku5.apps.googleusercontent.com.json"
-api_key = "AIzaSyBWqmnDfXSfNiSEDsluOMui9Dew_vHc0u8"
+api_key = "AIzaSyBxBcaYRKKjwMb3RqNi4gi5Up5OvRlThUY"
 
 
 # Get credentials and create an API client
@@ -43,12 +43,12 @@ def get_related_videos(query):
             part="snippet",
             q=query,
             type="video",
-            maxResults=50,
+            maxResults=10,
             pageToken=next_page_token
         ).execute()
         videos += res['items']
         next_page_token = res.get('nextPageToken')
-        if next_page_token is None or len(videos) >= 50:
+        if next_page_token is None or len(videos) >= 10:
             break
      
     videos = sorted(videos, key=lambda x:x['snippet']['publishedAt'])
