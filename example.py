@@ -29,12 +29,12 @@ def get_related_videos(query):
             part="snippet",
             q=query,
             type="video",
-            maxResults=50,
+            maxResults=10,
             pageToken=next_page_token
         ).execute()
         videos += res['items']
         next_page_token = res.get('nextPageToken')
-        if next_page_token is None:
+        if next_page_token is None or len(videos)>=10:
             break
      
     videos = sorted(videos, key=lambda x:x['snippet']['publishedAt'])
@@ -58,10 +58,22 @@ def write_json_into_csv(videos, stats):
     writer.writerow(keys)
     
     for dic, stat in zip(videos, stats):
-        title = dic['snippet']['title']
-        upload_time = dic['snippet']['publishedAt']
-        uploader = dic['snippet']['channelId']
-        view_count = stat['statistics']['viewCount']
+        if 'title' in dic['snippet']:
+            title =  dic['snippet']['title']
+        else:
+            title = " "
+        if 'publishedAt' in dic['snippet']:
+            upload_time = dic['snippet']['publishedAt']
+        else:
+            upload_time = " "
+        if 'channelId' in dic['snippet']:
+            uploader = dic['snippet']['channelId']
+        else:
+            uploader = " "
+        if 'viewCount' in stat['statistics']:
+            view_count = stat['statistics']['viewCount']
+        else:
+            view_count = " "
         writer.writerow([title, upload_time, uploader, view_count])
     csv_file.close()
 
