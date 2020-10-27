@@ -8,6 +8,7 @@ import os
 import csv
 import json
 import argparse
+import datetime
 
 import google_auth_oauthlib.flow
 import googleapiclient.discovery
@@ -15,23 +16,12 @@ import googleapiclient.errors
 
 scopes = ["https://www.googleapis.com/auth/youtube.force-ssl"]
 
-# Disable OAuthlib's HTTPS verification when running locally.
-# *DO NOT* leave this option enabled in production.
-# os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
-
 api_service_name = "youtube"
 api_version = "v3"
-# client_secrets_file = "client_secret_463048915584-qrp7qtk37bo3m9gvm5qboho7jb6hhku5.apps.googleusercontent.com.json"
 api_key = "AIzaSyBxBcaYRKKjwMb3RqNi4gi5Up5OvRlThUY"
 
-
-# Get credentials and create an API client
-# flow = google_auth_oauthlib.flow.InstalledAppFlow.from_client_secrets_file(
-#    client_secrets_file, scopes)
-# credentials = flow.run_console()
 youtube = googleapiclient.discovery.build(
     api_service_name, api_version, developerKey=api_key) #credentials=credentials)
-
 
 
 def get_related_videos(query):
@@ -86,6 +76,8 @@ def main():
     parser.add_argument('--query','-q',help='query', default='tenet')
     args = parser.parse_args()
     
+    start_time = datetime.datetime.now()
+    
     # get related videos
     videos = get_related_videos(args.query)
     print(len(videos))
@@ -97,6 +89,15 @@ def main():
     
     # write result into csv file
     write_json_into_csv(videos, stats)
+    
+    # output time
+    end_time = datetime.datetime.now()
+    duration = (end_time-start_time).seconds
+    days = int(duration/86400)
+    hours = int(duration/3600)-24*days
+    minutes = int(duration % 3600 /60)
+    seconds = int(duration % 60)
+    print("time passed: " + str(days) + "days " + str(hours) + "hours " + str(minutes) +"minutes " + str(seconds)+"seconds")
     
     
 if __name__ == "__main__":
