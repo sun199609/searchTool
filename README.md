@@ -1,9 +1,9 @@
 # searchTool
 
 ### Introduction  
-This CLI tool is used to search the related videos uploaded on YouTube given by the query term.
+This CLI tool is used for searching the related videos uploaded on YouTube given by the query term.
 ### Usage  
-You should make the environments set up before run the command line.  
+You should make the environments set up before running this CLI tool.  
 * Python 2.7 or Python 3.5+
 * The pip package management tool  
 * The Google APIs Client Library for Python:    
