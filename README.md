@@ -9,6 +9,6 @@ The search results will be saved to the csv file in the format of
 | title | upload_time | uploader | view_count |  
 | ---------- | :----------: | :----------: | :----------: |
 | titlexxx | xxxx-xx-xxTxx:xx:xxZ | channel_id | view_count | 
-### Get more information about the API    
+### Get more information about the YouTube API    
 https://developers.google.com/youtube/v3/getting-started
 
