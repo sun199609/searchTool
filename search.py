@@ -53,7 +53,7 @@ def get_videos_stats(video_ids):
 
 
 def write_json_into_csv(videos, stats):
-    csv_file = open("results_b.csv", "w", newline='')
+    csv_file = open("results_t.csv", "w", newline='')
     writer = csv.writer(csv_file,delimiter=',',quoting=csv.QUOTE_MINIMAL)
     keys = ['title','upload_time','uploader','view_count']
     writer.writerow(keys)
