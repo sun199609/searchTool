@@ -14,7 +14,7 @@ scopes = ["https://www.googleapis.com/auth/youtube.force-ssl"]
 
 api_service_name = "youtube"
 api_version = "v3"
-api_key = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" # substitute this using your own api key
+api_key = "AIzaSyBxBcaYRKKjwMb3RqNi4gi5Up5OvRlThUY" # substitute this using your own api key
 
 youtube = googleapiclient.discovery.build(
     api_service_name, api_version, developerKey=api_key) #credentials=credentials)
@@ -53,7 +53,7 @@ def get_videos_stats(video_ids):
 
 
 def write_json_into_csv(videos, stats):
-    csv_file = open("results.csv", "w", newline='')
+    csv_file = open("results_b.csv", "w", newline='')
     writer = csv.writer(csv_file,delimiter=',',quoting=csv.QUOTE_MINIMAL)
     keys = ['title','upload_time','uploader','view_count']
     writer.writerow(keys)
